@@ -38,14 +38,11 @@ Also has tmp address only set by micro instruction
 - Read temp addr(toggle)
 - Halt
 
-## Args
-
 ### Single Register arg
 - A=1000
 - B=0100
 - C=0010
 - D=0001
-- None=----(doesn't do anything but uses the same amount of cycles)
 
 
 ## Operating Modes
@@ -56,7 +53,21 @@ Also has tmp address only set by micro instruction
 - R=register2
 - A=imm8 **or** addr8
 - c=condition
-- -=doesn't matter
+- -=doesn't matter/ignored
+
+#### Registers
+Single Register (4 bits):
+- A=0001
+- B=0010
+- C=0100
+- D=1000
+- None=---- (doesn't do anything but uses the same amount of cycles)
+Double Register (2 bits):
+- A=00
+- B=01
+- C=10
+- D=11
+
 #### Byte order
 \[7654 3210] (left is most significant value)
 
