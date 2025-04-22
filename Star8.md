@@ -83,19 +83,13 @@ ssss cccc
 | condition | bits(cccc) |
 | --------- | ---------- |
 | A\==0     | 0000       |
-| A\==B     | 1000       |
-| ALU ZERO  | 0100       |
-| ALU OVF   | 0010       |
-| ALU NEG   | 0001       |
+| A\==B     | 0001       |
+| ALU ZERO  | 0010       |
+| ALU OVF   | 0100       |
+| ALU NEG   | 1000       |
 
 
 ## Instructions
-
-### **key**
-xxxx aaaa
-
-x=opcode
-a=args
 
 ### list of opcodes
 
