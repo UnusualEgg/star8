@@ -79,6 +79,7 @@ ssss ----
 
 ### Condition
 ssss cccc
+AAAA AAAA
 
 | condition | bits(cccc) |
 | --------- | ---------- |
@@ -144,7 +145,8 @@ Mode=reg-byte (addr8)
 ### JUMP IF(JIF)
 (Not gonna use JIF in assembly)
 
-Ins=0111 AAAA
+Ins=0111 cccc
+AAAA AAAA
 
 | Condition | Bits | Instruction                    |
 | --------- | ---- | ------------------------------ |
@@ -156,7 +158,8 @@ Ins=0111 AAAA
 
 Mode=imm8
 
-halts w/o halt flag set when A isn't a predefined condition aka a power of 2
+#### Note:
+halts when cccc isn't a (predefined condition / power of 2 except when 0)
 
 ### HALT
 Ins=1000 ----
