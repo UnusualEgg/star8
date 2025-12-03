@@ -17,7 +17,23 @@ fn main() {
 
     let mut total = [0u8; 64];
     let mut args = std::env::args().skip(1);
-    let prog = std::fs::read(args.next().expect("File")).unwrap();
+    let filename = args.next().expect("File");
+    let prog = if filename.ends_with(".s") {
+        //then compile!
+        let mut report = customasm::diagn::Report::new();
+        let mut fserv = customasm::util::FileServerReal::new();
+        fserv.add_std_files(&[("asm",include_str!("asm"))]);
+        let r = customasm::asm::assemble(&mut report, &customasm::asm::AssemblyOptions::new(), &mut fserv, &[filename.clone()]);
+        if r.error {
+            let mut stdout = std::io::stdout();
+            report.print_all(&mut stdout, &fserv, true);
+            panic!("error!");
+        }
+        r.output.unwrap().format_binary()
+    } else {
+        std::fs::read(filename).unwrap()
+    };
+    log::info!("read {} bytes", prog.len());
     //let prog = [0b0100_0001, 69, 0b1000_0000];
     for (i, v) in prog.iter().enumerate() {
         total[i] = *v;
@@ -29,5 +45,5 @@ fn main() {
         proc.tick();
         count += 1;
     }
-    debug!("took: {} regs: {:?}", count, proc.regs);
+    debug!("took: {} machine cycles. regs: {:?}", count, proc.regs);
 }

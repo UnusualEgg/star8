@@ -1,0 +1,32 @@
+#subruledef reg
+{
+a => 0b00
+b => 0b01
+c => 0b10
+d => 0b11
+}
+#subruledef singlereg
+{
+a => 0b0001
+b => 0b0010
+c => 0b0100
+d => 0b1000
+}
+#ruledef
+{
+nop => 0x00
+inc {r1:singlereg} => 0b0001 @ r1
+add {r1:reg}, {r2:reg} => 0b0010 @ r1 @ r2
+sub {r1:reg}, {r2:reg} => 0b0011 @ r1 @ r2
+ldi {r1:singlereg}, {val:i8} => 0b0100 @ r1 @ val
+stm {r1:singlereg}, {val:i8} => 0b0101 @ r1 @ val
+jmp {addr:u8} => 0b0110 @ 0b0000 @ addr
+jaz {addr:u8} => 0b0111 @ 0b0000 @ addr
+jeq {addr:u8} => 0b0111 @ 0b0001 @ addr
+jiz {addr:u8} => 0b0111 @ 0b0010 @ addr
+jov {addr:u8} => 0b0111 @ 0b0100 @ addr
+jng {addr:u8} => 0b0111 @ 0b1000 @ addr
+hlt => 0x80
+lda {r1:singlereg}, {addr:u8} => 0b1001 @ r1 @ addr
+
+}
